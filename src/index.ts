@@ -44,7 +44,7 @@ const serialize = function serialize(data: Record<string, any>): string {
 
 const sign = function sign(data: Record<string, any>): string {
   const str = serialize(data)
-  const result = md5(str).toString()
+  const result = md5(str)
 
   return result
 }
