@@ -7,6 +7,7 @@
     "dev": "tsc --watch",
     "build": "tsc",
     "type-check": "tsc --noEmit",
+    "lint": "npm run type-check && eslint --ext ts ./src",
     "test": "ava",
     "test:cov": "nyc ava"
   },
@@ -27,8 +28,10 @@
     "lodash": "~4.17.21"
   },
   "devDependencies": {
+    "@sqrtthree/eslint-config-base": "~0.1.1",
     "@sqrtthree/tsconfig": "~1.0.0",
     "@types/node": "~16.3.2",
+    "@typescript-eslint/eslint-plugin": "~4.28.3",
     "ava": "~3.15.0",
     "eslint": "~7.30.0",
     "koa-bodyparser": "~4.3.0",

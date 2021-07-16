@@ -28,15 +28,13 @@ const serialize = function serialize(data: Record<string, any>): string {
     const value = data[key]
     const empty = isEmpty(value)
 
-    if (empty) {
-      continue
-    }
+    if (!empty) {
+      if (result) {
+        result += '&'
+      }
 
-    if (result) {
-      result += '&'
+      result += `${key}=${value}`
     }
-
-    result += `${key}=${value}`
   }
 
   return result
@@ -61,10 +59,7 @@ const signData = function signData(
   return signature
 }
 
-const outdated = function outdated(
-  timestamp: number,
-  min: number = 5
-): boolean {
+const outdated = function outdated(timestamp: number, min = 5): boolean {
   const now = Date.now()
   const diff = Math.abs(now - timestamp)
   const m = 60000 // 60 * 1000
