@@ -95,7 +95,7 @@ export function signMiddleware(options: SignMiddlewareOptions): Koa.Middleware {
     const secret: string = await options.secret(ctx)
 
     if (!secret) {
-      ctx.throw(401, 'Invalid secret', {
+      ctx.throw(500, 'Invalid secret', {
         code: 'SECRET_INVALID',
       })
     }

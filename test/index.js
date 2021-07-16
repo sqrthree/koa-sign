@@ -28,8 +28,10 @@ app.use((ctx) => {
   ctx.body = 'success'
 })
 
-test('should respond 401 with SECRET_INVALID due to invalid secret', async (t) => {
+test('should respond 500 with SECRET_INVALID due to invalid secret', async (t) => {
   const localApp = new Koa()
+
+  localApp.silent = true
 
   localApp.use(
     signMiddleware({
@@ -41,9 +43,9 @@ test('should respond 401 with SECRET_INVALID due to invalid secret', async (t) =
 
   const response = await request(localApp.listen())
     .get(`/?timestamp=${timestamp}`)
-    .expect(401)
+    .expect(500)
 
-  t.is(response.error.text, 'Invalid secret')
+  t.is(response.serverError, true)
 })
 
 test('should respond 400 without timestamp', async (t) => {
