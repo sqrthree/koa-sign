@@ -5,12 +5,19 @@
   "main": "dist/index.js",
   "scripts": {
     "dev": "tsc --watch",
+    "prebuild": "npm run lint",
     "build": "tsc",
     "type-check": "tsc --noEmit",
     "lint": "npm run type-check && eslint --ext ts ./src",
     "test": "ava",
     "test:cov": "nyc ava"
   },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  },
+  "files": [
+    "dist"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/sqrthree/koa-sign.git"
