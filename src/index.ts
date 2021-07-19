@@ -72,7 +72,9 @@ interface SignMiddlewareOptions {
   secret: (ctx: Koa.Context) => string | Promise<string>
 }
 
-export function signMiddleware(options: SignMiddlewareOptions): Koa.Middleware {
+export function signMiddleware(
+  options: SignMiddlewareOptions
+): unless.Middleware {
   const middleware = async function middleware(
     ctx: Koa.Context,
     next: Koa.Next
