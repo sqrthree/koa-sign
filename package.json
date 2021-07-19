@@ -32,7 +32,7 @@
   "homepage": "https://github.com/sqrthree/koa-sign#readme",
   "dependencies": {
     "koa": "~2.13.1",
-    "koa-less": "~0.0.3",
+    "koa-unless": "~1.0.7",
     "lodash": "~4.17.21"
   },
   "devDependencies": {
