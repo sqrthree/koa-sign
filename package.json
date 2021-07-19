@@ -10,7 +10,8 @@
     "type-check": "tsc --noEmit",
     "lint": "npm run type-check && eslint --ext ts ./src",
     "test": "ava",
-    "test:cov": "nyc ava"
+    "test:cov": "nyc ava",
+    "prepublishOnly": "npm run build"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
