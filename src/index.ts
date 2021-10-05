@@ -2,6 +2,7 @@ import crypto from 'crypto'
 import Koa from 'koa'
 import unless from 'koa-unless'
 import _ from 'lodash'
+import path from 'path'
 
 const md5 = function md5(value: string): string {
   const hash = crypto.createHash('md5')
@@ -68,6 +69,12 @@ const outdated = function outdated(timestamp: number, min = 5): boolean {
   return minutes > min
 }
 
+const isStaticFile = function isStaticFile(filepath: string): boolean {
+  const ext = path.extname(filepath)
+
+  return !!ext
+}
+
 interface SignMiddlewareOptions {
   secret: (ctx: Koa.Context) => string | Promise<string>
 }
@@ -82,8 +89,15 @@ export function signMiddleware(
     const { method, query } = ctx
     const logger = ctx.logger || console
     const { body } = ctx.request
-    const hasQuery = !_.isEmpty(query)
+
+    const staticFile = isStaticFile(ctx.path)
+
+    if (staticFile) {
+      return next()
+    }
+
     const hasBody = !_.isEmpty(body)
+    const hasQuery = !_.isEmpty(query)
 
     const timestamp = _.get(query, 'timestamp') || _.get(body, 'timestamp') || 0
     const isOutdated = outdated(timestamp)

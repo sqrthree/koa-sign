@@ -149,3 +149,13 @@ test('should respond 200 with empty value in body', async (t) => {
 
   t.is(response.text, 'success')
 })
+
+test('should respond 200 with static file request', async (t) => {
+  let response = await request(app.listen()).post('/a.png').expect(200)
+
+  t.is(response.text, 'success')
+
+  response = await request(app.listen()).post('/a.css').expect(200)
+
+  t.is(response.text, 'success')
+})
